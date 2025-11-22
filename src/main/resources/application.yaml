@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /movie-ratings
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+
+  application:
+    name: movie-ratings
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/movie_ratings?createDatabaseIfNotExist=true
+    username: root
+    password: 1111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: movie_ratings
+    default-schema: movie_ratings
+    locations: classpath:db/migration
+
+logging:
+  level:
+    org.flywaydb: DEBUG
