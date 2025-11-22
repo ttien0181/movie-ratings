@@ -17,6 +17,7 @@ public class AppConfig implements WebMvcConfigurer {
     public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3001")
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization")
@@ -30,7 +31,7 @@ public class AppConfig implements WebMvcConfigurer {
 
         // Cho phép frontend ở địa chỉ này truy cập
         configuration.setAllowedOrigins(List.of("http://localhost:3001"));
-//        configuration.setAllowedOriginPatterns(List.of("*"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
 
         // Cho phép gửi cookie, JWT hoặc header Authorization
         configuration.setAllowCredentials(true);
