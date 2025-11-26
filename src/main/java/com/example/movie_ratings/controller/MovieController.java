@@ -50,9 +50,12 @@ public class MovieController extends BaseController {
     }
 
     @GetMapping("/genre/{genreId}")
-    public ResponseEntity<APIResponse<List<MovieResponse>>> getByGenre(@PathVariable Long genreId) {
+    public ResponseEntity<APIResponse<List<MovieResponse>>> getByGenre(
+            @PathVariable Long genreId
+    ) {
         return okResponse(service.getByGenreId(genreId));
     }
+
 
 }
 

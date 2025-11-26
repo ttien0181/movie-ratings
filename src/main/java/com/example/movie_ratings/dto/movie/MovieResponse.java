@@ -1,6 +1,9 @@
 package com.example.movie_ratings.dto.movie;
 
+import com.example.movie_ratings.dto.genre.GenreResponse;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class MovieResponse {
@@ -10,7 +13,10 @@ public class MovieResponse {
     private Integer releaseYear;
     private Float rating;
     private Integer totalRate;
-    private Long genreId;
     private String createdAt;
     private String actors;
+    private String posterUrl;
+
+    private List<GenreResponse> genres;
 }
+

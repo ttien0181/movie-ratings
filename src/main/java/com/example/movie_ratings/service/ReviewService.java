@@ -17,7 +17,9 @@ public interface ReviewService {
 
     void delete(Long id);
 
-    void updateMovieRating(Long movieId);
+    void addMovieRating(Long movieId, int ratting);
+
+    void removeMovieRatting(Long reviewId);
 
     List<ReviewResponse> getByMovieId(Long movieId);
 

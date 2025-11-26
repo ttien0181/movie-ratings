@@ -103,27 +103,51 @@ public class ReviewServiceImpl implements ReviewService {
 
 
     @Override
-    public void updateMovieRating(Long movieId) {
+    public synchronized void addMovieRating(Long movieId, int rating) {
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("Rating must be 1-5");
+        }
 
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
 
-        List<Review> reviews = reviewRepository.findByMovie(movie);
+        int total = movie.getTotalRate();
+        float avg = movie.getRating();
 
-        if (reviews.isEmpty()) {
-            movie.setRating(0f);
+        int newTotal = total + 1;
+        float newAvg = ((avg * total) + rating) / newTotal;
+
+        movie.setTotalRate(newTotal);
+        movie.setRating(newAvg);
+
+        movieRepository.save(movie);
+    }
+
+
+    @Override
+    public synchronized void removeMovieRatting(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        Movie movie = review.getMovie();
+
+        int total = movie.getTotalRate();
+        float avg = movie.getRating();
+        float rating = review.getRating();
+
+        int newTotal = total - 1;
+
+        if (newTotal <= 0) {
             movie.setTotalRate(0);
+            movie.setRating(0f);
         } else {
-            float avg = (float) reviews.stream()
-                    .mapToInt(Review::getRating)
-                    .average()
-                    .orElse(0);
-
-            movie.setRating(avg);
-            movie.setTotalRate(reviews.size());
+            float newAvg = ((avg * total) - rating) / newTotal;
+            movie.setTotalRate(newTotal);
+            movie.setRating(newAvg);
         }
 
         movieRepository.save(movie);
     }
+
 }
 

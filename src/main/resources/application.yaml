@@ -17,20 +17,27 @@ spring:
     url: jdbc:mysql://localhost:3306/movie_ratings?createDatabaseIfNotExist=true
     username: root
     password: 1111
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
-  jpa:
-    hibernate:
-      ddl-auto: none
-    show-sql: true
-
-  flyway:
-    enabled: true
-    baseline-on-migrate: true
-    schemas: movie_ratings
-    default-schema: movie_ratings
-    locations: classpath:db/migration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ttien0181@gmail.com
+    password: hxqt hvmh bjhu jrmw
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 logging:
   level:
-    org.flywaydb: DEBUG
+    org:
+    root: INFO
+    com.example.movie_ratings: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+
+  flyway:
+    enabled: false

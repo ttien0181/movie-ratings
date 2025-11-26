@@ -5,10 +5,13 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "movies")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Movie {
@@ -25,16 +28,8 @@ public class Movie {
 
     private Integer releaseYear;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "genre_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "fk_movies_genre")
-    )
-    private Genre genre;
-
     @Column
-    private Float rating; // trung bình từ reviews
+    private Float rating;
 
     @Column(name = "total_rate")
     private Integer totalRate;
@@ -45,4 +40,10 @@ public class Movie {
 
     @Column(columnDefinition = "TEXT")
     private String actors;
+
+    @Column(name = "poster_url", length = 500)
+    private String posterUrl;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MovieGenre> movieGenres = new HashSet<>();
 }

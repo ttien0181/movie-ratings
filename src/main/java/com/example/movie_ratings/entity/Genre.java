@@ -2,10 +2,12 @@ package com.example.movie_ratings.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "genre")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Genre {
@@ -19,4 +21,7 @@ public class Genre {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+    private Set<MovieGenre> movieGenres;
 }
