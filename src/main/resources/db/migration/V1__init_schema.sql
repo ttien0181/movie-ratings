@@ -65,9 +65,7 @@ CREATE TABLE reviews (
         ON DELETE CASCADE ON UPDATE CASCADE,
 
     FOREIGN KEY (movie_id) REFERENCES movies(id)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-
-    UNIQUE (user_id, movie_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ===========================
@@ -118,29 +116,29 @@ INSERT INTO genre (name, description) VALUES
 ('Horror', 'Phim kinh dị, giật gân');
 
 -- ★ THÊM poster_url vào INSERT MOVIES
-INSERT INTO movies (title, description, release_year, rating, total_rate, actors, poster_url) VALUES
-('Avengers: Endgame', 'Siêu anh hùng giải cứu vũ trụ', 2019, 5.0, 2, 'Robert Downey Jr, Chris Evans', 'https://image.tmdb.org/t/p/original/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg'),
-('John Wick 4', 'Sát thủ huyền thoại', 2023, 4.0, 1, 'Keanu Reeves', 'https://i.ebayimg.com/images/g/SRgAAOSwXY9kNpU~/s-l1600.webp'),
-('Deadpool', 'Hài hành động siêu bựa', 2016, 4.0, 1, 'Ryan Reynolds', 'https://m.media-amazon.com/images/I/71SBA4bdx8L._AC_UF894,1000_QL80_.jpg'),
-('The Hangover', 'Nhóm bạn lầy lội ở Las Vegas', 2009, 3.0, 1, 'Bradley Cooper', 'https://m.media-amazon.com/images/M/MV5BNDI2MzBhNzgtOWYyOS00NDM2LWE0OGYtOGQ0M2FjMTI2NTllXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg'),
-('Interstellar', 'Hành trình xuyên không gian cứu Trái Đất', 2014, 5.0, 1, 'Matthew McConaughey', 'https://m.media-amazon.com/images/I/91obuWzA3XL._AC_UF894,1000_QL80_.jpg'),
-('Inception', 'Thế giới nằm trong giấc mơ', 2010, 5.0, 1, 'Leonardo DiCaprio', 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg'),
-('The Conjuring', 'Gia đình gặp thế lực siêu nhiên', 2013, 4.0, 1, 'Patrick Wilson', 'https://m.media-amazon.com/images/I/81NwnEjW27L._AC_SL1500_.jpg'),
-('Annabelle', 'Búp bê ma ám', 2014, 3.0, 1, 'Annabelle', 'https://m.media-amazon.com/images/M/MV5BNjkyMDU5ZWQtZDhkOC00ZWFjLWIyM2MtZWFhMDUzNjdlNzU2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg'),
-('The Shawshank Redemption', 'Vượt ngục kinh điển, top IMDb', 1994, 5.0, 1, 'Tim Robbins', 'https://m.media-amazon.com/images/I/911USrdQtPL.jpg'),
-('Forrest Gump', 'Cuộc đời đặc biệt của Forrest', 1994, 5.0, 1, 'Tom Hanks', 'https://m.media-amazon.com/images/I/613ZgTigTpL.jpg');
+INSERT INTO movies (id, title, description, release_year, rating, total_rate, actors, poster_url) VALUES
+(1, 'Avengers: Endgame', 'Siêu anh hùng giải cứu vũ trụ', 2019, 4.75, 4, 'Robert Downey Jr, Chris Evans', 'https://image.tmdb.org/t/p/original/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg'),
+(2, 'John Wick 4', 'Sát thủ huyền thoại', 2023, 4.67, 3, 'Keanu Reeves', 'https://i.ebayimg.com/images/g/SRgAAOSwXY9kNpU~/s-l1600.webp'),
+(3, 'Deadpool', 'Hài hành động siêu bựa', 2016, 4.00, 3, 'Ryan Reynolds', 'https://m.media-amazon.com/images/I/71SBA4bdx8L._AC_UF894,1000_QL80_.jpg'),
+(4, 'The Hangover', 'Nhóm bạn lầy lội ở Las Vegas', 2009, 3.33, 3, 'Bradley Cooper', 'https://m.media-amazon.com/images/M/MV5BNDI2MzBhNzgtOWYyOS00NDM2LWE0OGYtOGQ0M2FjMTI2NTllXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg'),
+(5, 'Interstellar', 'Hành trình xuyên không gian cứu Trái Đất', 2014, 4.75, 4, 'Matthew McConaughey', 'https://m.media-amazon.com/images/I/91obuWzA3XL._AC_UF894,1000_QL80_.jpg'),
+(6, 'Inception', 'Thế giới nằm trong giấc mơ', 2010, 5.00, 2, 'Leonardo DiCaprio', 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg'),
+(7, 'The Conjuring', 'Gia đình gặp thế lực siêu nhiên', 2013, 3.67, 3, 'Patrick Wilson', 'https://m.media-amazon.com/images/I/81NwnEjW27L._AC_SL1500_.jpg'),
+(8, 'Annabelle', 'Búp bê ma ám', 2014, 2.50, 2, 'Annabelle', 'https://m.media-amazon.com/images/M/MV5BNjkyMDU5ZWQtZDhkOC00ZWFjLWIyM2MtZWFhMDUzNjdlNzU2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg'),
+(9, 'The Shawshank Redemption', 'Vượt ngục kinh điển, top IMDb', 1994, 5.00, 2, 'Tim Robbins', 'https://m.media-amazon.com/images/I/911USrdQtPL.jpg'),
+(10, 'Forrest Gump', 'Cuộc đời đặc biệt của Forrest', 1994, 5.00, 3, 'Tom Hanks', 'https://m.media-amazon.com/images/I/613ZgTigTpL.jpg');
 
 INSERT INTO movie_genres (movie_id, genre_id) VALUES
-(1, 1),
-(2, 1),
-(3, 2),
-(4, 2),
-(5, 4),
-(6, 4),
-(7, 5),
-(8, 5),
-(9, 3),
-(10, 3);
+(1, 1), (1, 3), (1, 4),      -- Endgame: Action, Drama, Sci-Fi
+(2, 1), (2, 3),              -- John Wick: Action, Drama
+(3, 1), (3, 2),              -- Deadpool: Action, Comedy
+(4, 2), (4, 3),              -- Hangover: Comedy, Drama
+(5, 3), (5, 4),              -- Interstellar: Drama, Sci-Fi
+(6, 3), (6, 4),              -- Inception: Drama, Sci-Fi
+(7, 5), (7, 3),              -- Conjuring: Horror, Drama
+(8, 5),                      -- Annabelle: Horror
+(9, 3),                      -- Shawshank: Drama
+(10, 3);                     -- Forrest Gump: Drama
 
 
 -- REVIEWS
