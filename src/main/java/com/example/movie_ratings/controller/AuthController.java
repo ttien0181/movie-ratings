@@ -4,7 +4,7 @@ import com.example.movie_ratings.dto.APIResponse;
 import com.example.movie_ratings.dto.auth.*;
 import com.example.movie_ratings.entity.User;
 import com.example.movie_ratings.entity.VerificationCode;
-import com.example.movie_ratings.exception.UsernameAlreadyExistsException;
+import com.example.movie_ratings.exception.EmailAlreadyExistsException;
 import com.example.movie_ratings.repository.UserRepository;
 import com.example.movie_ratings.security.JwtUtil;
 import com.example.movie_ratings.service.VerificationService;
@@ -68,8 +68,8 @@ public class AuthController {
 
     @PostMapping("/send-verification-code")
     public ResponseEntity<APIResponse<String>> sendVerificationCode(@RequestBody SendVerificationCodeRequest request) {
-        if (userRepository.findByUsername(request.getEmail()).isPresent()) {
-            throw new UsernameAlreadyExistsException(request.getEmail());
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new EmailAlreadyExistsException(request.getEmail());
         }
 
         verificationService.generateAndSendVerificationCode(
@@ -88,7 +88,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<APIResponse<String>> register(@RequestBody RegisterRequest registerRequest) {
         if (userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
-            throw new UsernameAlreadyExistsException("Email already exists");
+            throw new EmailAlreadyExistsException("Email already exists");
         }
 
 

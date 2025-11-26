@@ -3,7 +3,7 @@ package com.example.movie_ratings.exception.handler;
 import com.example.movie_ratings.dto.APIResponse;
 import com.example.movie_ratings.dto.common.ErrorDetail;
 import com.example.movie_ratings.exception.UserNotFoundException;
-import com.example.movie_ratings.exception.UsernameAlreadyExistsException;
+import com.example.movie_ratings.exception.EmailAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
     // ⚙️ User-related
     @ExceptionHandler({
             UserNotFoundException.class,
-            UsernameAlreadyExistsException.class
+            EmailAlreadyExistsException.class
     })
     public ResponseEntity<APIResponse<ErrorDetail>> handleUserExceptions(RuntimeException ex) {
         return buildError("user", ex.getMessage(), HttpStatus.NOT_FOUND);
