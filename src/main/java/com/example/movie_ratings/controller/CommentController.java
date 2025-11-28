@@ -42,5 +42,10 @@ public class CommentController extends BaseController {
     public ResponseEntity<APIResponse<List<CommentResponse>>> getByReview(@PathVariable Long reviewId) {
         return okResponse(service.getByReviewId(reviewId));
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<APIResponse<List<CommentResponse>>> getByUser(@PathVariable Long userId) {
+        return okResponse(service.getByUserId(userId));
+    }
 }
 

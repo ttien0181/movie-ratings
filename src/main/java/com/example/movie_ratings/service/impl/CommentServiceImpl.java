@@ -76,5 +76,19 @@ public class CommentServiceImpl implements CommentService {
 
         return ValueMapper.MAPPER.convertToCommentResponseList(comments);
     }
+
+    @Override
+    public List<CommentResponse> getByUserId(Long userid) {
+
+//        Review review = reviewRepo.findById(reviewId)
+//                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        User user = userRepo.findById(userid)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<Comment> comments = repo.findByUser(user);
+
+        return ValueMapper.MAPPER.convertToCommentResponseList(comments);
+    }
 }
 

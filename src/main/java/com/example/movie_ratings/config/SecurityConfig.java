@@ -3,6 +3,7 @@ package com.example.movie_ratings.config;
 import com.example.movie_ratings.security.JwtAuthenticationFilter;
 import com.example.movie_ratings.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Configuration // Đánh dấu class này là một lớp cấu hình của Spring
 @RequiredArgsConstructor // Lombok tự tạo constructor cho các field final
+@EnableMethodSecurity
 public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {

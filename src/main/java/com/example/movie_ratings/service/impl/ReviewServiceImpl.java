@@ -103,7 +103,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 
     @Override
-    public synchronized void addMovieRating(Long movieId, int rating) {
+    public synchronized void calcAddMovieRating(Long movieId, int rating) {
         if (rating < 1 || rating > 5) {
             throw new IllegalArgumentException("Rating must be 1-5");
         }
@@ -125,7 +125,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 
     @Override
-    public synchronized void removeMovieRatting(Long reviewId) {
+    public synchronized void calcRemoveMovieRating(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("Review not found"));
 
@@ -148,6 +148,25 @@ public class ReviewServiceImpl implements ReviewService {
 
         movieRepository.save(movie);
     }
+
+    public synchronized void calcUpdateMovieRating(Long reviewId, int newRating, Long newMovieId) {
+
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        Movie oldMovie = review.getMovie();
+        int oldRating = review.getRating();
+
+        // chỉ đổi rating trong cùng 1 movie
+        int total = oldMovie.getTotalRate();
+        float avg = oldMovie.getRating();
+
+        float newAvg = ((avg * total) - oldRating + newRating) / total;
+
+        oldMovie.setRating(newAvg);
+        movieRepository.save(oldMovie);
+    }
+
 
 }
 

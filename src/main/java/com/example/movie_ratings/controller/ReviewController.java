@@ -33,26 +33,29 @@ public class ReviewController extends BaseController {
         ReviewResponse response = reviewService.create(request);
 
         // Cập nhật rating phim
-        reviewService.addMovieRating(request.getMovieId(), request.getRating());
+        reviewService.calcAddMovieRating(request.getMovieId(), request.getRating());
 
         return okResponse(response);
     }
 
-//    @PutMapping("/{id}")
-//    ResponseEntity<APIResponse<ReviewResponse>> update(
-//            @PathVariable Long id,
-//            @RequestBody ReviewRequest request
-//    ) {
-//        ReviewResponse response = reviewService.update(id, request);
-//        reviewService.addMovieRating(request.getMovieId(), request.getRating());
-//        return okResponse(response);
-//    }
+    // thay đổi rating (id là id của review)
+    @PutMapping("/{id}")
+    ResponseEntity<APIResponse<ReviewResponse>> update(
+            @PathVariable Long id,
+            @RequestBody ReviewRequest request
+    ) {
+        ReviewResponse response = reviewService.update(id, request);
 
-    //  xoa review bang reviewId
+        reviewService.calcUpdateMovieRating(id, request.getRating(), request.getMovieId());
+
+        return okResponse(response);
+    }
+
+
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id) {
+        reviewService.calcRemoveMovieRating(id);
         reviewService.delete(id);
-        reviewService.removeMovieRatting(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -35,18 +35,18 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<APIResponse<AuthResponse>> login(@RequestBody AuthRequest authRequest) {
-        // ✅ Xác thực username & password
+        // Xác thực username & password
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken( // sẽ gọi UserDetailsServiceImpl để gọi loadUserByUsername()
                         authRequest.getEmail(), // tham số đầu tiên sẽ là principal (được truyền vào loadUserByUsername)
                         authRequest.getPassword()) // tham số thứ 2 sẽ là credentials
         );
 
-        // ✅ Lấy thông tin user từ UserDetails
+        // Lấy thông tin user từ UserDetails
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String token = jwtUtil.generateToken(userDetails);
 
-        // ✅ Tìm user trong DB để lấy thêm id, email, role
+        // Tìm user trong DB để lấy thêm id, email, role
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 

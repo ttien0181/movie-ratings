@@ -29,10 +29,10 @@ public class Movie {
     private Integer releaseYear;
 
     @Column
-    private Float rating;
+    private Float rating = 0f;
 
     @Column(name = "total_rate")
-    private Integer totalRate;
+    private Integer totalRate = 0;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

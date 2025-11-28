@@ -8,6 +8,7 @@ import com.example.movie_ratings.controller.base.BaseController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class UserController extends BaseController {
 
     private final UserService service;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<APIResponse<User>> create(@RequestBody UserRequest userRequest) {
         System.out.println("1: "+userRequest);
@@ -29,6 +31,7 @@ public class UserController extends BaseController {
         return okResponse(service.getById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<APIResponse<List<User>>> getAll() {
         return okResponse(service.getAll());
@@ -39,6 +42,13 @@ public class UserController extends BaseController {
         return okResponse(service.update(id, user));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}/ban")
+    public ResponseEntity<APIResponse<User>> setBanned(@PathVariable Long id, @RequestParam boolean banned) {
+        return okResponse(service.setBanned(id, banned));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<APIResponse<String>> delete(@PathVariable Long id) {
         service.delete(id);

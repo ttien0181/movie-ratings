@@ -47,4 +47,11 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         repo.deleteById(id);
     }
+
+    @Override
+    public User setBanned(Long id, boolean banned) {
+        User user = getById(id);
+        user.setBanned(banned);
+        return repo.save(user);
+    }
 }

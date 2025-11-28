@@ -34,6 +34,9 @@ public class User {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private boolean banned = false;
+
     public enum Role {
         ADMIN, USER
     }

@@ -16,4 +16,6 @@ public interface UserService {
     User update(Long id, User user);
 
     void delete(Long id);
+
+    User setBanned(Long id, boolean banned);
 }

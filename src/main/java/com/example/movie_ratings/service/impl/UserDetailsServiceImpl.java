@@ -4,6 +4,7 @@ import com.example.movie_ratings.entity.impl.UserDetailsImpl;
 import com.example.movie_ratings.repository.UserRepository;
 import org.hibernate.dialect.function.array.OracleArrayGetFunction;
 import org.hibernate.grammars.ordering.OrderingParser;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +26,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("Load user by email: " + email);
         return userRepository.findByEmail(email)
                 .map(user -> {
+                    // Check if user is banned
+                    if (user.isBanned()) {
+                        throw new DisabledException("Tài khoản đã bị vô hiệu hóa");
+                    }
                     System.out.println("Found user: " + user.getUsername() + ", role: " + user.getRole());
                     var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
                     return new org.springframework.security.core.userdetails.User(
