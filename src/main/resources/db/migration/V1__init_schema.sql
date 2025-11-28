@@ -17,7 +17,8 @@ CREATE TABLE users (
 CREATE TABLE genre (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
-    description TEXT
+    description TEXT,
+    thumbnail_url VARCHAR(500)
 );
 
 -- ===========================
@@ -125,12 +126,12 @@ INSERT INTO users (username, email, password, role, created_at, banned) VALUES
  '$2a$12$nU1q2YF4ctwG4.Ck6POkVuvLIsgzoA1kBRtT2Y2fHW43wTjj.jrUW',
  'USER', '2024-11-27 17:30:00', FALSE);
 
-INSERT INTO genre (name, description) VALUES
-('Action', 'Phim hành động, đánh nhau, siêu anh hùng'),
-('Comedy', 'Phim hài hước giải trí'),
-('Drama', 'Phim tâm lý, cảm xúc'),
-('Sci-Fi', 'Phim khoa học viễn tưởng, không gian'),
-('Horror', 'Phim kinh dị, giật gân');
+INSERT INTO genre (name, description, thumbnail_url) VALUES
+('Action', 'Phim hành động, đánh nhau, siêu anh hùng', 'https://www.nyfa.edu/wp-content/uploads/2022/11/action-movie.jpg'),
+('Comedy', 'Phim hài hước giải trí', 'https://www.blackpoolgrand.co.uk/app/uploads/2021/09/Book-of-Mormon-Best-Stage-Comedy-Plays.jpg'),
+('Drama', 'Phim tâm lý, cảm xúc', 'https://dumloongdigital.com/public/medies/Aug_2023/1691009967.64cac3af9bb81.jpg'),
+('Sci-Fi', 'Phim khoa học viễn tưởng, không gian', 'https://nofilmschool.com/media-library/zz3340101d.jpg?id=34083566&width=1245&height=700&coordinates=67%2C0%2C68%2C0'),
+('Horror', 'Phim kinh dị, giật gân', 'https://gwtoday.gwu.edu/sites/g/files/zaxdzs5401/files/2023-10/howtostillsurviveahorrormovie-conceptssermontaglines-1920x1080_3_1_0.jpeg');
 
 -- ★ THÊM poster_url vào INSERT MOVIES
 INSERT INTO movies (id, title, description, release_year, rating, total_rate, actors, poster_url, created_at) VALUES

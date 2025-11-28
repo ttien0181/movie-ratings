@@ -6,4 +6,5 @@ import lombok.Data;
 public class GenreRequest {
     private String name;
     private String description;
+    private String thumbnailUrl;
 }

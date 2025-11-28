@@ -22,6 +22,9 @@ public class Genre {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "thumbnail_url", length = 500)
+    private String thumbnailUrl;
+
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
     private Set<MovieGenre> movieGenres;
 }
